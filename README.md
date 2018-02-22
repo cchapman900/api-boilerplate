@@ -15,6 +15,8 @@ npm install
 serverless deploy
 ```
 
+Rename `example.config.yml` to `config.yml` and add your MongoDB Atlas connection string to the `MONGO_URI` property
+
 ## Usage
 
 In `handler.js` update the `mongoString` with your mongoDB url.
