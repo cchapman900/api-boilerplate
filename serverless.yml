@@ -31,8 +31,8 @@ functions:
           method: delete
           cors: true
 
-  user:
-    handler: handler.user
+  getUser:
+    handler: handler.getUser
     events:
       - http:
           path: user/{id}

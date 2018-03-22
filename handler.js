@@ -13,7 +13,7 @@ const createErrorResponse = (statusCode, message) => ({
   body: {'message': message} || {'message': 'An unexpected error occured'},
 });
 
-module.exports.user = (event, context, callback) => {
+module.exports.getUser = (event, context, callback) => {
   const db = mongoose.connect(mongoString).connection;
   const id = event.pathParameters.id;
 
