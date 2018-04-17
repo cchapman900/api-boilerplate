@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bluebird = require('bluebird');
 const validator = require('validator');
 const UserModel = require('./model/User.js');
+const auth = require('./auth');
 
 mongoose.Promise = bluebird;
 
@@ -12,6 +13,16 @@ const createErrorResponse = (statusCode, message) => ({
   headers: { 'Content-Type': 'application/json' },
   body: {'message': message} || {'message': 'An unexpected error occured'},
 });
+
+module.exports.authenticate = function (event, context) {
+    auth.authenticate(event, function (err, data) {
+        if (err) {
+            if (!err) context.fail("Unhandled error");
+            context.fail("Unauthorized");
+        }
+        else context.succeed(data);
+    });
+};
 
 module.exports.getUser = (event, context, callback) => {
   const db = mongoose.connect(mongoString).connection;
